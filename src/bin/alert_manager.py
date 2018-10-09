@@ -235,7 +235,7 @@ def updateIncident(incident_id, metadata, sessionKey):
         entry['owner'] = metadata['owner']
 
     entry['search'] = metadata['entry'][0]['name']
-    entry['external_reference_id'] = metadata['external_reference_id']
+    entry['external_reference_id'] = incidents[0]['external_reference_id']
     entry['duplicate_count'] = incidents[0]['duplicate_count']
     entry['preserve_owner'] = incidents[0].get('preserve_owner')
     entry['preserve_urgency'] = incidents[0].get('preserve_urgency')
@@ -666,8 +666,8 @@ if __name__ == "__main__":
         log.debug("Metadata: {}".format(json.dumps(metadata)))
         # Check if there is already an incident to append to...
         if config['append_incident'] and incident_key is not None:
-            event = 'severity=INFO origin="alert_handler" user="%s" action="comment" incident_id="%s" job_id="%s" alert_time="%s" comment="%s"' % ('splunk-system-user', incident_id, job_id, metadata['alert_time'], "Appending duplicate alert")
-            createIncidentChangeEvent(event, metadata['job_id'], settings.get('index'))
+            # event = 'severity=INFO origin="alert_handler" user="%s" action="comment" incident_id="%s" job_id="%s" alert_time="%s" comment="%s"' % ('splunk-system-user', incident_id, job_id, metadata['alert_time'], "Appending duplicate alert")
+            # createIncidentChangeEvent(event, metadata['job_id'], settings.get('index'))
             # Update the duplicate_count
             updateDuplicateCount(incident_key, sessionKey)
             # Update incident
