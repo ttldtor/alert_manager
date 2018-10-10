@@ -315,7 +315,9 @@
 | join type=left incident_id
     [ search index=alerts sourcetype=incident_change action="comment" NOT comment="Appending duplicate*" NOT comment="HPSM workflowaction*" NOT comment="Updated external_reference_id*"
     | stats latest(comment) AS comments by incident_id]
-| table dobulkedit, dosearch, doedit, doquickassign, doexternalworkflowaction, _time, owner, status, status_description, incident_id, job_id, result_id, alert, title, HPSM, comments, app, category, subcategory, tags, impact, urgency, priority, search, event_search, earliest, latest, display_fields, alert_time, external_reference_id, duplicate_count, earliest_alert_time, first_seen, group, group_id</query>
+| lookup incident_results incident_id OUTPUT fields.platform as platform
+| eval Occurred = first_seen
+| table dobulkedit, dosearch, doedit, doquickassign, doexternalworkflowaction, Occurred, owner, status, status_description, incident_id, job_id, result_id, alert, title, HPSM, comments, platform, app, category, subcategory, tags, impact, urgency, priority, search, event_search, earliest, latest, display_fields, alert_time, external_reference_id, duplicate_count, earliest_alert_time, first_seen, group, group_id</query>
           <earliest>$global_time.earliest$</earliest>
           <latest>$global_time.latest$</latest>
         </search>
