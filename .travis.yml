@@ -19,3 +19,5 @@ deploy:
   api_key: "$GH_TOKEN"
   file: "./build/distributions/alert_manager-*.spl"
   skip_cleanup: true
+  on:
+    all_branches: true
