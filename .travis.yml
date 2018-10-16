@@ -13,11 +13,13 @@ before_deploy:
   - git config --local user.name "ttldtor"
   - git config --local user.email "ttldtor@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  - export RELEASE_FILE=$(ls ./build/distributions/alert_manager-*.spl)
+  - echo "deploying $RELEASE_FILE to GitHub releases"
 
 deploy:
   provider: releases
-  api_key: "$GH_TOKEN"
-  file: "./build/distributions/alert_manager-*.spl"
+  api_key: $GH_TOKEN
+  file: "$RELEASE_FILE"
   skip_cleanup: true
   on:
     all_branches: true
