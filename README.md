@@ -1,5 +1,5 @@
 # Alert Manager
-![Build Status](https://api.travis-ci.org/ttldtor/alert_manager.svg?branch=develop "Build Status")
+[![Build Status](https://travis-ci.org/ttldtor/alert_manager.svg?branch=develop)](https://travis-ci.org/ttldtor/alert_manager)
 
 - **Authors**:		Simon Balz <simon@balz.me>, Mika Borner <mika.borner@gmail.com>
 - **Description**:	Extended Splunk Alert Manager with advanced reporting on alerts, workflows (modify assignee, status, severity) and auto-resolve features
